@@ -20,13 +20,24 @@
             "js/background/background.js"
         ]
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://login.microsoftonline.com/common/oauth2/nativeclient?*"
+            ],
+            "js": [
+                "js/content_script/nativeclient.js"
+            ]
+        }
+    ],
     "browser_action": {
         "browser_style": true,
         "default_icon": {
             "32": "icons/icon32.png",
             "48": "icons/icon48.png"
         },
-        "default_title": "Teams Presence Checker"
+        "default_title": "Teams Presence Checker",
+        "default_popup": "html/popup.html"
     },
     "options_ui": {
         "page": "html/options.html",
@@ -34,7 +45,8 @@
         "chrome_style": true
     },
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "https://login.microsoftonline.com/*"
     ],
     "web_accessible_resources": []
 }
