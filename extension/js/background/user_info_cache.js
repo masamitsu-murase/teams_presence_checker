@@ -1,0 +1,43 @@
+var TeamsPresenceChecker;
+if (!TeamsPresenceChecker) {
+    TeamsPresenceChecker = {};
+}
+
+(function (ctx) {
+    "use strict";
+
+    class UserInfoCache {
+        constructor() {
+            this.setMemberList([]);
+        }
+
+        get memberList() {
+            return this._member_list;
+        }
+
+        userInfo(member) {
+            return this._user_info_map[member];
+        }
+
+        get userIds() {
+            const user_info_map = this._user_info_map;
+            return this._member_list.map(x => user_info_map[x]["id"]);
+        }
+
+        unknownMembers() {
+            const user_info_map = this._user_info_map;
+            return this._member_list.filter(x => !(x in user_info_map));
+        }
+
+        setMemberList(member_list) {
+            this._member_list = member_list;
+            this._user_info_map = {};
+        }
+
+        setUserInfo(member, user_info) {
+            this._user_info_map[member] = user_info;
+        }
+    }
+
+    ctx.UserInfoCache = UserInfoCache;
+})(TeamsPresenceChecker);

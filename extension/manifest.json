@@ -17,6 +17,9 @@
     "default_locale": "en",
     "background": {
         "scripts": [
+            "js/background/option_data.js",
+            "js/background/graph_api_token.js",
+            "js/background/user_info_cache.js",
             "js/background/background.js"
         ]
     },
@@ -46,6 +49,7 @@
     },
     "permissions": [
         "activeTab",
+        "storage",
         "https://login.microsoftonline.com/*"
     ],
     "web_accessible_resources": []
