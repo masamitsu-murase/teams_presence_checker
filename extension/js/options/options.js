@@ -35,6 +35,10 @@ if (!TeamsPresenceChecker) {
         browser.runtime.sendMessage({ "type": "login", "args": [] });
     };
 
+    const logout = async function () {
+        browser.runtime.sendMessage({ "type": "logout", "args": [] });
+    };
+
     const synchronizeLoginStatus = async function () {
         const login_status = await browser.runtime.sendMessage({ "type": "loginStatus", "args": [] });
         document.getElementById("login_status").textContent = login_status.loggedin ? "OK" : "Not logged in.";
@@ -45,6 +49,11 @@ if (!TeamsPresenceChecker) {
             document.getElementById("login_button").classList.remove("disabled");
         } else {
             document.getElementById("login_button").classList.add("disabled");
+        }
+        if (login_status.loggedin) {
+            document.getElementById("logout_button").classList.remove("disabled");
+        } else {
+            document.getElementById("logout_button").classList.add("disabled");
         }
     };
 
@@ -71,6 +80,10 @@ if (!TeamsPresenceChecker) {
         document.getElementById("login_button").addEventListener("click", e => {
             e.preventDefault();
             login();
+        });
+        document.getElementById("logout_button").addEventListener("click", e => {
+            e.preventDefault();
+            logout();
         });
     });
 

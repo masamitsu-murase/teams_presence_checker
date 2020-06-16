@@ -15,9 +15,9 @@ if (!TeamsPresenceChecker) {
         const headers = {
             "Authorization": await gGraphApiToken.getAuthorizationHeader()
         };
-        const url = `${url_base}${path}`;
+        let url = `${url_base}${path}`;
         if (query) {
-            url += url + `?${query}`;
+            url += `?${query}`;
         }
         const response = await fetch(url, {
             method: "GET",
@@ -62,8 +62,8 @@ if (!TeamsPresenceChecker) {
     const getUserIds = async function () {
         const unknown_members = gUserInfoCache.unknownMembers();
         if (unknown_members.length > 0) {
-            const unknown_members_info = await getUsersInfo(unknownMembers);
-            // TODO
+            const unknown_members_info = await getUsersInfo(unknown_members);
+            gUserInfoCache.setUsersInfo(unknown_members, unknown_members_info);
         }
     };
 
@@ -71,17 +71,22 @@ if (!TeamsPresenceChecker) {
         const user_ids = await getUserIds();
         const parameter = { "ids": user_ids };
         const presences = await postGraphApi("/beta/communications/getPresencesByUserId", parameter)
-        const presence_list = [];
-        for (let presence of presences) {
-            presence_list.push({
-            })
+        const presence_map = {};
+        for (let presence of presences.value) {
             presence_map[presence["id"]] = presence;
         }
-        return presence_map;
+        const presence_list = user_ids.map(ui => presence_map[ui]);
+        return presence_list;
     };
 
     const fetchCurrentStatus = async function (args) {
-        return await getGraphApi("/v1.0/me");
+        // return await getGraphApi("/v1.0/me");
+        const now = Date.now();
+        const presence_list = await getCurrentPresences();
+        return {
+            "timestamp": now,
+            "presences": presence_list
+        };
     };
 
     const notifyLoginStatusChanged = function () {
@@ -100,6 +105,12 @@ if (!TeamsPresenceChecker) {
         }
         const url = await gGraphApiToken.getAuthorizationUrl();
         await browser.tabs.create({ active: true, url: url });
+        notifyLoginStatusChanged();
+    };
+
+    const logout = async function (args) {
+        gGraphApiToken.clear();
+        gUserInfoCache.clear();
         notifyLoginStatusChanged();
     };
 
@@ -132,7 +143,7 @@ if (!TeamsPresenceChecker) {
         await gOptionData.save();
 
         gGraphApiToken.setTenantAndClientId(gOptionData.tenant, gOptionData.client_id);
-        gUserIdCache.setMemberList(gOptionData.member_list);
+        gUserInfoCache.setMemberList(gOptionData.member_list);
         notifyLoginStatusChanged();
 
         return { "result": true };
@@ -167,6 +178,8 @@ if (!TeamsPresenceChecker) {
                     return;
                 case "login":
                     return login(message.args);
+                case "logout":
+                    return logout(message.args);
                 case "initializeToken":
                     return initializeToken(message.args);
                 case "loginStatus":

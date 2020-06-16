@@ -11,6 +11,10 @@ if (!TeamsPresenceChecker) {
             this.setMemberList([]);
         }
 
+        clear() {
+            this.setMemberList([]);
+        }
+
         get memberList() {
             return this._member_list;
         }
@@ -36,6 +40,14 @@ if (!TeamsPresenceChecker) {
 
         setUserInfo(member, user_info) {
             this._user_info_map[member] = user_info;
+        }
+
+        setUsersInfo(members, users_info) {
+            for (let i = 0; i < members.length; i++) {
+                const member = members[i];
+                const user_info = users_info[i];
+                this._user_info_map[member] = user_info;
+            }
         }
     }
 
