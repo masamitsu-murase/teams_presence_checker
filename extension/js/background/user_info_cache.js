@@ -23,6 +23,11 @@ if (!TeamsPresenceChecker) {
             return this._user_info_map[member];
         }
 
+        get usersInfo() {
+            const user_info_map = this._user_info_map;
+            return this._member_list.map(x => user_info_map[x]);
+        }
+
         get userIds() {
             const user_info_map = this._user_info_map;
             return this._member_list.map(x => user_info_map[x]["id"]);

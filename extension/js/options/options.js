@@ -62,8 +62,9 @@ if (!TeamsPresenceChecker) {
         console.log(optoin_data);
         document.getElementById("tenant").value = optoin_data.tenant;
         document.getElementById("client_id").value = optoin_data.client_id;
-        document.getElementById("member_list").value = optoin_data.member_list.join(", ");
+        document.getElementById("member_list").value = optoin_data.member_list;
         M.updateTextFields();
+        M.textareaAutoResize(document.getElementById('member_list'));
     };
 
     document.addEventListener("DOMContentLoaded", e => {

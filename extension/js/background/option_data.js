@@ -12,7 +12,7 @@ if (!TeamsPresenceChecker) {
         constructor() {
             this._tenant = "";
             this._client_id = "";
-            this._member_list = [];
+            this._member_list_raw = "";
         }
 
         async save() {
@@ -20,7 +20,7 @@ if (!TeamsPresenceChecker) {
                 "option_data": {
                     "tenant": this._tenant,
                     "client_id": this._client_id,
-                    "member_list": this._member_list
+                    "member_list_raw": this._member_list_raw
                 }
             });
         }
@@ -49,18 +49,27 @@ if (!TeamsPresenceChecker) {
             this._client_id = client_id_value;
         }
 
-        get member_list() {
-            return this._member_list;
+        get member_list_raw() {
+            return this._member_list_raw;
         }
 
-        set member_list(member_list_value) {
+        get member_list() {
+            return this.parseMemberList(this._member_list_raw);
+        }
+
+        set member_list_raw(raw_value) {
+            this.parseMemberList(raw_value);
+            this._member_list_raw = raw_value;
+        }
+
+        parseMemberList(member_list_raw) {
             const mail_pattern = "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*";
-            member_list_value = member_list_value.trim().replace(/\s*,\s*/g, ",").replace(/\s+/g, ",");
-            const member_list = member_list_value.split(",");
+            member_list_raw = member_list_raw.trim().replace(/\s*,\s*/g, ",").replace(/\s+/g, ",");
+            const member_list = member_list_raw.split(",");
             if (!(member_list.every(item => item.match(mail_pattern)))) {
                 throw new Error("Member list is invalid.");
             }
-            this._member_list = member_list;
+            return member_list;
         }
     }
 
