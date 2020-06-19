@@ -19,7 +19,6 @@ if (!TeamsPresenceChecker) {
             }
         };
         const result = await browser.runtime.sendMessage(message);
-        console.log(result);
 
         if (!(result.result) && result.error_message.length > 0) {
             const msg = result.error_message.join("\n");
@@ -59,7 +58,6 @@ if (!TeamsPresenceChecker) {
 
     const loadOptions = async function () {
         const optoin_data = await browser.runtime.sendMessage({ "type": "loadOptions", "args": [] });
-        console.log(optoin_data);
         document.getElementById("tenant").value = optoin_data.tenant;
         document.getElementById("client_id").value = optoin_data.client_id;
         document.getElementById("member_list").value = optoin_data.member_list;

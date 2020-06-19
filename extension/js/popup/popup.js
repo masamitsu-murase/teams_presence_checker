@@ -34,7 +34,6 @@ if (!TeamsPresenceChecker) {
             vue_users.push(user);
         }
         vm.users.splice.apply(vm.users, [0, vm.users.length].concat(vue_users));
-        console.log(status);
     };
 
     const refreshStatus = async function () {

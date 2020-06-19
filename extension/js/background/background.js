@@ -12,6 +12,16 @@ if (!TeamsPresenceChecker) {
     const gOptionData = await ctx.OptionData.load();
     const gUserInfoCache = new ctx.UserInfoCache();
 
+    const console_log = (function () {
+        if (DEBUG) {
+            return function (...args) {
+                console.log.apply(console, args);
+            };
+        } else {
+            return function (...args) { };
+        }
+    })();
+
     const getGraphApiProduction = async function (path, query) {
         const url_base = "https://graph.microsoft.com";
         const headers = {
@@ -126,7 +136,7 @@ if (!TeamsPresenceChecker) {
             presence_map[presence["id"]] = presence;
         }
         const presence_list = user_ids.map(ui => presence_map[ui]);
-        console.log(presences, presence_map, presence_list);
+        console_log(presences, presence_map, presence_list);
         return presence_list;
     };
 
@@ -222,7 +232,6 @@ if (!TeamsPresenceChecker) {
     };
 
     const onMessage = function (message, sender, sendResponse) {
-        console.log("onMessage");
         try {
             switch (message.type) {
                 case "closeThisTab":
@@ -251,12 +260,5 @@ if (!TeamsPresenceChecker) {
         }
     }
 
-    // chrome.browserAction.onClicked.addListener(tab => {
-    //     console.log("onClicked");
-    //     onClicked(tab);
-    // });
-
     browser.runtime.onMessage.addListener(onMessage);
-
-    ctx.a = gGraphApiToken;
 })(TeamsPresenceChecker);
