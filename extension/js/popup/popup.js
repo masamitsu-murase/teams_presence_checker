@@ -6,13 +6,11 @@ if (!TeamsPresenceChecker) {
 (function (ctx) {
     "use strict";
 
-    let vm = null;
-
     const fetchCurrentStatus = async function () {
         return await browser.runtime.sendMessage({ "type": "fetchCurrentStatus" });
     };
 
-    const updateView = function (status) {
+    const updateView = function (vm, status) {
         vm.healthy = true;
         const presences = status.presences;
         const users_info = status.users_info;
@@ -36,39 +34,21 @@ if (!TeamsPresenceChecker) {
         vm.users.splice.apply(vm.users, [0, vm.users.length].concat(vue_users));
     };
 
-    const refreshStatus = async function () {
+    const refreshStatus = async function (vm) {
         try {
             const status = await fetchCurrentStatus();
-            updateView(status);
+            updateView(vm, status);
         } catch (err) {
             console.error(err);
             vm.healthy = false;
         }
     };
 
-    document.addEventListener("DOMContentLoaded", e => {
-        vm = new Vue({
-            el: "#app",
-            data: {
-                healthy: true,
-                users: []
-            },
-            methods: {
-                openOptions: function (event) {
-                    browser.runtime.openOptionsPage();
-                }
-            }
-        });
+    const openOptions = function (event) {
+        browser.runtime.openOptionsPage();
+    };
 
-        const refresh_link = document.getElementById("refresh_link");
-        if (refresh_link) {
-            refresh_link.addEventListener("click", e => {
-                e.preventDefault();
-                refreshStatus();
-            });
-        }
-
-        refreshStatus();
-    });
+    ctx.refreshStatus = refreshStatus;
+    ctx.openOptions = openOptions;
 })(TeamsPresenceChecker);
 

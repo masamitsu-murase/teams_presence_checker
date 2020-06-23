@@ -173,6 +173,7 @@ if (!TeamsPresenceChecker) {
     const logout = async function (args) {
         gGraphApiToken.clear();
         gUserInfoCache.clear();
+        gUserInfoCache.setMemberList(gOptionData.member_list);
         notifyLoginStatusChanged();
     };
 
