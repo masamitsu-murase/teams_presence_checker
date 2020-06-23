@@ -1,3 +1,6 @@
+extension/js/popup/popup_vue.js
+vue_template/dist/
+vue_template/node_modules/
 .vscode/
 venv/
 *~
