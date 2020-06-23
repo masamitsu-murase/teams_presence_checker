@@ -106,7 +106,8 @@ if (!TeamsPresenceChecker) {
 
         async initialize(url) {
             url = new URL(url);
-            const search_params = url.searchParams;
+            const hash_param = url.hash.slice(1);
+            const search_params = new URLSearchParams(hash_param);
             const state = search_params.get("state");
             if (state != this.state) {
                 throw new Error(`Invalid state: ${state}`);
@@ -118,7 +119,7 @@ if (!TeamsPresenceChecker) {
                 throw new Error(`code is not defined.`);
             }
 
-            const code = url.searchParams.get("code");
+            const code = search_params.get("code");
 
             let token_param = new URLSearchParams();
             token_param.append("client_id", this.client_id);
@@ -212,6 +213,8 @@ if (!TeamsPresenceChecker) {
             param.append("code_challenge_method", "S256");
             param.append("code_challenge", code_challenge);
             param.append("state", this.state);
+            param.append("prompt", "select_account");
+            param.append("response_mode", "fragment");
 
             return `${this.authorizeUrl}?${param.toString()}`;
         }
