@@ -49,16 +49,79 @@ if (!TeamsPresenceChecker) {
                         "displayName": "鈴木 一郎",
                         "givenName": "一郎",
                         "surname": "鈴木",
-                        "mail": "user2@example.com",
+                        "mail": "user9@example.com",
                         "mailNickname": "suzuki",
                         "userPrincipalName": "user2@example.com"
                     },
                     {
-                        "id": "66825e03-7ef5-42da-9069-724602c31f6b",
-                        "displayName": "山田 太郎",
-                        "givenName": "太郎",
+                        "id": "16825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎1",
+                        "givenName": "太郎1",
                         "surname": "山田",
                         "mail": "user1@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "26825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎2",
+                        "givenName": "太郎2",
+                        "surname": "山田",
+                        "mail": "user2@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "36825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎3",
+                        "givenName": "太郎3",
+                        "surname": "山田",
+                        "mail": "user3@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "46825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎4",
+                        "givenName": "太郎4",
+                        "surname": "山田",
+                        "mail": "user4@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "56825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎5",
+                        "givenName": "太郎5",
+                        "surname": "山田",
+                        "mail": "user5@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "66825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎6",
+                        "givenName": "太郎6",
+                        "surname": "山田",
+                        "mail": "user6@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "76825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎7",
+                        "givenName": "太郎7",
+                        "surname": "山田",
+                        "mail": "user7@example.com",
+                        "mailNickname": "yamada",
+                        "userPrincipalName": "user1@example.com"
+                    },
+                    {
+                        "id": "86825e03-7ef5-42da-9069-724602c31f6b",
+                        "displayName": "山田 太郎8",
+                        "givenName": "太郎8",
+                        "surname": "山田",
+                        "mail": "user8@example.com",
                         "mailNickname": "yamada",
                         "userPrincipalName": "user1@example.com"
                     }
@@ -89,12 +152,47 @@ if (!TeamsPresenceChecker) {
             return {
                 "value": [{
                     "id": "fa8bf3dc-eca7-46b7-bad1-db199b62afc3",
-                    "availability": (Math.random() < 0.5 ? "Busy" : "Available"),
+                    "availability": (Math.random() < 0.5 ? "Busy" : "PresenceUnknown"),
                     "activity": "InAMeeting"
                 },
                 {
-                    "id": "66825e03-7ef5-42da-9069-724602c31f6b",
+                    "id": "16825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "Available",
+                    "activity": "Away"
+                },
+                {
+                    "id": "26825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "AvailableIdle",
+                    "activity": "Away"
+                },
+                {
+                    "id": "36825e03-7ef5-42da-9069-724602c31f6b",
                     "availability": "Away",
+                    "activity": "Away"
+                },
+                {
+                    "id": "46825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "BeRightBack",
+                    "activity": "Away"
+                },
+                {
+                    "id": "56825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "Busy",
+                    "activity": "Away"
+                },
+                {
+                    "id": "66825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "BusyIdle",
+                    "activity": "Away"
+                },
+                {
+                    "id": "76825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "DoNotDisturb",
+                    "activity": "Away"
+                },
+                {
+                    "id": "86825e03-7ef5-42da-9069-724602c31f6b",
+                    "availability": "Offline",
                     "activity": "Away"
                 }]
             };

@@ -21,7 +21,7 @@
           v-bind:title="user.title"
           v-bind:key="user.id"
         >
-          <i class="material-icons circle" v-bind:class="user.presence_color">person</i>
+          <i class="material-icons circle" v-bind:class="user.presence_color">{{ user.icon }}</i>
           <span class="title">{{ user.displayName }}</span>
           <p>{{ user.mail }}</p>
         </li>
