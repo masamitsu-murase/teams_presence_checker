@@ -3,6 +3,7 @@ name: WebExtensions
 on:
   push:
     branches: [ master, support_github_actions ]
+    tags: ['v*']
   pull_request:
     branches: [ master ]
 
@@ -31,5 +32,4 @@ jobs:
       shell: cmd
     - uses: actions/upload-artifact@v2
       with:
-        name: WebExtensions zipped file.
         path: teams_presence_checker.zip
