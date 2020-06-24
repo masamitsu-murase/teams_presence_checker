@@ -21,7 +21,7 @@ jobs:
         npm ci
       shell: cmd
     - name: Build popup_vue.js
-      run: %ComSpec% /c build.cmd
+      run: '%ComSpec% /c build.cmd'
       shell: cmd
     - name: Create WebExtensions
       run: |
