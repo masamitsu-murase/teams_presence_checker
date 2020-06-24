@@ -1,0 +1,35 @@
+name: WebExtensions
+
+on:
+  push:
+    branches: [ master, support_github_actions ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+    - name: Install npm modules
+      run: |
+        cd vue_template
+        npm ci
+      shell: cmd
+    - name: Build popup_vue.js
+      run: %ComSpec% /c build.cmd
+      shell: cmd
+    - name: Create WebExtensions
+      run: |
+        cd extension
+        where 7z.exe
+        7z.exe a ..\teams_presence_checker.zip *
+      shell: cmd
+    - uses: actions/upload-artifact@v2
+      with:
+        name: WebExtensions zipped file.
+        path: teams_presence_checker.zip
