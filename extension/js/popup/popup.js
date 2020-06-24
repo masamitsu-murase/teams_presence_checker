@@ -22,13 +22,21 @@ if (!TeamsPresenceChecker) {
                 mail: users_info[i].mail
             };
             const availability_map = {
-                "Available": "green",
-                "Busy": "red",
-                "Away": "yellow",
-                "BeRightBack": "gray"
+                "Available": ["green", "person"],
+                "AvailableIdle": ["green", "person_outline"],
+                "Away": ["yellow", "person_outline"],
+                "BeRightBack": ["yellow", "person"],
+                "Busy": ["red", "person"],
+                "BusyIdle": ["red", "person_outline"],
+                "DoNotDisturb": ["red", "do_not_disturb"],
+                "Offline": ["gray", "home"],
+                "PresenceUnknown": ["gray", "help_outline"]
             };
-            user.presence_color = availability_map[presence.availability];
+            const availability_info = availability_map[presence.availability];
+            user.presence_color = availability_info[0];
             user.title = `${presence.availability}: ${presence.activity}`;
+            user.icon = availability_info[1];
+            user.id = i;
             vue_users.push(user);
         }
         vm.users.splice.apply(vm.users, [0, vm.users.length].concat(vue_users));
