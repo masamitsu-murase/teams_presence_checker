@@ -75,7 +75,7 @@ if (!TeamsPresenceChecker) {
 
     OptionData.load = async function () {
         try {
-            const raw_option_data = await browser.storage.local.get("option_data");
+            const raw_option_data = (await browser.storage.local.get("option_data")).option_data;
             const new_option_data = new OptionData();
             new_option_data.tenant = raw_option_data.tenant;
             new_option_data.client_id = raw_option_data.client_id;
