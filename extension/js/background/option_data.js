@@ -79,7 +79,7 @@ if (!TeamsPresenceChecker) {
             const new_option_data = new OptionData();
             new_option_data.tenant = raw_option_data.tenant;
             new_option_data.client_id = raw_option_data.client_id;
-            new_option_data.member_list = raw_option_data.member_list;
+            new_option_data.member_list_raw = raw_option_data.member_list_raw;
             return new_option_data;
         } catch (error) {
             return new OptionData();
