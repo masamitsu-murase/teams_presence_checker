@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Teams Presence Checker",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Extension to check Teams Presence.",
     "icons": {
         "32": "icons/icon32.png",
