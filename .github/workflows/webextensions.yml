@@ -46,3 +46,14 @@ jobs:
         draft: true
         prerelease: false
       if: startsWith(github.ref, 'refs/tags/v')
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./teams_presence_checker.zip
+        asset_name: teams_presence_checker.zip
+        asset_content_type: application/zip
+      if: startsWith(github.ref, 'refs/tags/v')
