@@ -63,6 +63,10 @@ if (!TeamsPresenceChecker) {
         }
 
         parseMemberList(member_list_raw) {
+            if (member_list_raw === "") {
+                return [];
+            }
+
             const mail_pattern = "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*";
             member_list_raw = member_list_raw.trim().replace(/\s*,\s*/g, ",").replace(/\s+/g, ",");
             const member_list = member_list_raw.split(",");
