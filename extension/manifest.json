@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Teams Presence Checker",
-    "version": "0.2.0",
+    "version": "0.3.1",
     "description": "Extension to check Teams Presence.",
     "icons": {
         "32": "icons/icon32.png",
@@ -17,6 +17,7 @@
     "default_locale": "en",
     "background": {
         "scripts": [
+            "js/common/browser-polyfill.min.js",
             "js/background/option_data.js",
             "js/background/graph_api_token.js",
             "js/background/user_info_cache.js",
@@ -29,6 +30,7 @@
                 "https://login.microsoftonline.com/common/oauth2/nativeclient"
             ],
             "js": [
+                "js/common/browser-polyfill.min.js",
                 "js/content_script/nativeclient.js"
             ]
         }
@@ -45,7 +47,7 @@
     "options_ui": {
         "page": "html/options.html",
         "open_in_tab": true,
-        "chrome_style": true
+        "chrome_style": false
     },
     "permissions": [
         "activeTab",
