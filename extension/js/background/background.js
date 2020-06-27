@@ -11,6 +11,8 @@ if (!TeamsPresenceChecker) {
     const gGraphApiToken = new ctx.GraphApiToken("", "");
     const gOptionData = await ctx.OptionData.load();
     const gUserInfoCache = new ctx.UserInfoCache();
+    gGraphApiToken.setTenantAndClientId(gOptionData.tenant, gOptionData.client_id);
+    gUserInfoCache.setMemberList(gOptionData.member_list);
 
     const console_log = (function () {
         if (DEBUG) {
