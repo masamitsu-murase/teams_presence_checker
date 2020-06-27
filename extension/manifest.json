@@ -17,6 +17,7 @@
     "default_locale": "en",
     "background": {
         "scripts": [
+            "js/common/browser-polyfill.min.js",
             "js/background/option_data.js",
             "js/background/graph_api_token.js",
             "js/background/user_info_cache.js",
@@ -29,6 +30,7 @@
                 "https://login.microsoftonline.com/common/oauth2/nativeclient"
             ],
             "js": [
+                "js/common/browser-polyfill.min.js",
                 "js/content_script/nativeclient.js"
             ]
         }
