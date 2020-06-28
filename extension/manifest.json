@@ -50,7 +50,6 @@
         "chrome_style": false
     },
     "permissions": [
-        "activeTab",
         "storage",
         "https://login.microsoftonline.com/*"
     ],
